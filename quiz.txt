@@ -1,5 +1,15 @@
-1. Why do you use "using strict" at the top of your JS files?
-2. What does line 3 mean?
+1. Why do you use "use strict" at the top of your JS files?
+  "use strict"; at the top of the file enables strict mode, in which the interpreter throws an error when a variable is assigned without being declared (via var, let, const).
+  If you don't use strict mode, it will instead implicitly declare that variable in the global scope (as if using "var").
+
+2. What does line 3 mean (in app.js)?
+  Declares a (mutable) variable with the identifier "count" and sets its value to 0.
+
 3. What is happening on lines 5-8 and why?
-4. If you implemented the functionality of the buttons,
-   why do you think I wrote the JS code the way I did?
+  The app is getting DOM references for the input elements (the three buttons) and the element(s) that will display the output (".count").
+
+4. If you implemented the functionality of the buttons, why do you think I wrote the JS code the way I did?
+(I assume you mean putting the increment/decrement/reset behavior into separate, individual functions, rather than just coding it directly into the event listener.)
+
+I think you're using the principles of encapsulation and separation of concerns.
+In this case, it would be *simpler* to put "count++" right in the event listener - but that would violate separation of concerns. An event listener's job isn't to increment a variable; it's to listen for an event and report when it happens. Sure, *this* time, the logic that is triggered by the event is one tiny line of code, but out in the wild, it'll nearly always be much longer and more complex. It's much easier to read and debug if you encapsulate the response behavior inside its own function, with a name that clearly tells you what it does.
